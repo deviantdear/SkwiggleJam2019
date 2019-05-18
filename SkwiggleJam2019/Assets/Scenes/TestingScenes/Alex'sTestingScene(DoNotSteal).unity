@@ -3363,6 +3363,7 @@ MonoBehaviour:
   deadline: 120
   timerText: {fileID: 1562571425}
   paused: 0
+  viewDistance: 5
   pauseCanvas: {fileID: 0}
   invisible: 0
   stealthGauge: {fileID: 148713260}

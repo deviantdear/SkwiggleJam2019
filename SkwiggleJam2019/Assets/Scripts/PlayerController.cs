@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 	public int deadline;
 	public Text timerText;
 	public bool paused;
+	public float viewDistance;
 	public GameObject pauseCanvas;
 	private GameObject failureCanvas, victoryCanvas;
 
@@ -34,12 +35,12 @@ public class PlayerController : MonoBehaviour {
 	private bool casting;
 	private float coolDownMax, coolDown1, coolDown2, coolDown3, coolDownAlpha;
 	private RaycastHit seen;
+	private Vector3 facingDir;
 
 // Start is called before the first frame update
 	void Start() {
 		paused = casting = false;
-		coolDown1 = coolDown2 = coolDown3 = 0f;
-		coolDownMax = 100f;
+		coolDown1 = coolDown2 = coolDown3 = coolDownMax = 100f;
 		coolDownAlpha = 0.25f;
 
 		pauseCanvas = GameObject.Find("PauseCanvas");
@@ -50,7 +51,9 @@ public class PlayerController : MonoBehaviour {
 		failureCanvas.SetActive(false);
 		victoryCanvas.SetActive(false);
 
-		up = down = left = right = false;
+		up = left = right = false;
+		down = true;
+		Vector3 facingDir = -Vector3.forward;
 
 		deathSpriteObj = GameObject.Find("DeathSprite");
 		animate = deathSpriteObj.GetComponent<Animator>();
@@ -75,6 +78,18 @@ public class PlayerController : MonoBehaviour {
 			timerText.text = deadline/60 + ":0" + deadline%60;
 		}
 
+		Color temp = cast1.color;
+		temp.a = coolDownAlpha;
+		cast1.color = temp;
+
+		temp = cast2.color;
+		temp.a = coolDownAlpha;
+		cast2.color = temp;
+
+		temp = cast3.color;
+		temp.a = coolDownAlpha;
+		cast3.color = temp;
+
 		StartCoroutine(InvisHandler());
 		StartCoroutine(AbilityCooldowns());
 		StartCoroutine(DeadlineCounter());
@@ -94,7 +109,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-	// Controls
+	// Player Input/Controls
 		if (!paused && !casting) {
 		// Movement stuff
 			if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
@@ -200,42 +215,60 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		// Ability RAYCasting hehe get it? casting but with a raycast!
-			if ((Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) || (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) || (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax)) {
-				casting = true;
+			if (up) {
+				facingDir = Vector3.forward;
+			} else if (down) {
+				facingDir = -Vector3.forward;
+			} else if (left) {
+				facingDir = -Vector3.right;
+			} else if (right) {
+				facingDir = Vector3.right;
+			}
 
-				if (Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) {
-					coolDown1 = 0f;
-					Color temp = cast1.color;
-					temp.a = coolDownAlpha;
-					cast1.color = temp;
+			Debug.DrawRay(this.transform.position, this.transform.TransformDirection(facingDir) * viewDistance, Color.white);
 
-				} else if (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) {
-					coolDown2 = 0f;
-					Color temp = cast2.color;
-					temp.a = coolDownAlpha;
-					cast2.color = temp;
+			if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(facingDir), out seen, viewDistance)) {
+				GameObject seenObj = seen.collider.gameObject;
 
-				} else if (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax) {
-					coolDown3 = 0f;
-					Color temp = cast3.color;
-					temp.a = coolDownAlpha;
-					cast3.color = temp;
-				}
+				//if (seenObj.CompareTag("Patients")) {
+					if ((Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) || (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) || (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax)) {
+						casting = true;
 
-				if (up && animate.GetInteger("PlayerState") != 9) {
-					animate.SetInteger("PlayerState", 9);
+						if (Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) {
+							coolDown1 = 0f;
+							Color temp = cast1.color;
+							temp.a = coolDownAlpha;
+							cast1.color = temp;
 
-				} else if (down && animate.GetInteger("PlayerState") != 10) {
-					animate.SetInteger("PlayerState", 10);
+						} else if (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) {
+							coolDown2 = 0f;
+							Color temp = cast2.color;
+							temp.a = coolDownAlpha;
+							cast2.color = temp;
 
-				} else if (left && animate.GetInteger("PlayerState") != 11) {
-					animate.SetInteger("PlayerState", 11);
+						} else if (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax) {
+							coolDown3 = 0f;
+							Color temp = cast3.color;
+							temp.a = coolDownAlpha;
+							cast3.color = temp;
+						}
 
-				} else if (right && animate.GetInteger("PlayerState") != 12) {
-					animate.SetInteger("PlayerState", 12);
-				}
+						if (up && animate.GetInteger("PlayerState") != 9) {
+							animate.SetInteger("PlayerState", 9);
 
-				StartCoroutine(AbilityUseCooldown());
+						} else if (down && animate.GetInteger("PlayerState") != 10) {
+							animate.SetInteger("PlayerState", 10);
+
+						} else if (left && animate.GetInteger("PlayerState") != 11) {
+							animate.SetInteger("PlayerState", 11);
+
+						} else if (right && animate.GetInteger("PlayerState") != 12) {
+							animate.SetInteger("PlayerState", 12);
+						}
+
+						StartCoroutine(AbilityUseCooldown());
+					}
+				//}
 			}
 
 		// Invisibility input handler
