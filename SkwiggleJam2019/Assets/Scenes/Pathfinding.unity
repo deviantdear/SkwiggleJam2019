@@ -331,8 +331,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patient: {fileID: 242564740}
   col: {fileID: 242564738}
-  seconds: 20
-  ringLength: 10
+  seconds: 5
+  ringLength: 20
   amountOfRings: 3
   additionalMult: 0.1
   priority: 0
@@ -353,9 +353,13 @@ MonoBehaviour:
   sickeningRate: 0
   recoveryRate: 0
   isCalling: 0
-  maxHealth: 0
-  health: 0
-  wellnessPriorities: []
+  maxHealth: 10
+  health: 5
+  wellnessPriorities:
+  - 1
+  - 2
+  - 3
+  - 5
 --- !u!1 &347269105
 GameObject:
   m_ObjectHideFlags: 0
