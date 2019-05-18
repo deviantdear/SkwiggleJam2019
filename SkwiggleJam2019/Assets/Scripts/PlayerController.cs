@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 	public bool paused;
 
-// Used for invisibility 5 second drain, 15 second refil
+// Used for invisibility things; 5 second drain, 15 second refil
 	public bool invisible;
+	public Image stealthGauge;
 	private bool invisCoolDown;
-	private float invisPool, invisPoolMax;
+	private RectTransform stealthTransform;
+	private float invisPool, invisPoolMax, minGaugeX, maxGaugeX, gaugeY;
 
 // Used for movement
-	private float vSpeed, hSpeed, moveSpeed;
+	public float moveSpeed;
+	private float vSpeed, hSpeed;
 
 // Start is called before the first frame update
 	void Start() {
@@ -19,6 +23,12 @@ public class PlayerController : MonoBehaviour {
 
 		invisible = invisCoolDown = false;
 		invisPool = invisPoolMax = 100.0f;
+
+		stealthTransform = stealthGauge.GetComponent<RectTransform>();
+
+		gaugeY = stealthTransform.position.y;
+		minGaugeX = stealthTransform.position.x;
+		maxGaugeX = stealthTransform.position.x - stealthTransform.rect.width;
 
 		moveSpeed = 2.5f;
 		hSpeed = vSpeed = 0.0f;
@@ -75,6 +85,12 @@ public class PlayerController : MonoBehaviour {
 			} else if (invisPool == invisPoolMax && invisCoolDown) {
 				invisCoolDown = false;
 			}
+
+		// Update Invisibility Gauge Visually
+			var newPosX = (-invisPool) * (maxGaugeX - minGaugeX) / (invisPoolMax) + minGaugeX;
+			Vector3 newGaugeX = new Vector3(newPosX, gaugeY);
+
+			stealthGauge.transform.position = newGaugeX;
 		}
 	}
 
