@@ -30,11 +30,17 @@ public class PlayerController : MonoBehaviour {
 	private float moveSpeed, vSpeed, hSpeed;
 
 // Casting variables for Death's ailments
-	private bool casting, cast1, cast2, cast3;
+	public Image cast1, cast2, cast3;
+	private bool casting;
+	private float coolDownMax, coolDown1, coolDown2, coolDown3, coolDownAlpha;
+	private RaycastHit seen;
 
 // Start is called before the first frame update
 	void Start() {
-		paused = casting = cast1 = cast2 = cast3 = false;
+		paused = casting = false;
+		coolDown1 = coolDown2 = coolDown3 = 0f;
+		coolDownMax = 100f;
+		coolDownAlpha = 0.25f;
 
 		pauseCanvas = GameObject.Find("PauseCanvas");
 		failureCanvas = GameObject.Find("FailureCanvas");
@@ -70,7 +76,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		StartCoroutine(InvisHandler());
-
+		StartCoroutine(AbilityCooldowns());
 		StartCoroutine(DeadlineCounter());
 	}
 
@@ -193,18 +199,27 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 
-		// Ability Casting
-			if ((Input.GetKey(KeyCode.Alpha1) && !cast1) || (Input.GetKey(KeyCode.Alpha2) && !cast2) || (Input.GetKey(KeyCode.Alpha3) && !cast3)) {
+		// Ability RAYCasting hehe get it? casting but with a raycast!
+			if ((Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) || (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) || (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax)) {
 				casting = true;
-				if (Input.GetKey(KeyCode.Alpha1) && !cast1) {
-					
 
-				} else if (Input.GetKey(KeyCode.Alpha2) && !cast2) {
+				if (Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) {
+					coolDown1 = 0f;
+					Color temp = cast1.color;
+					temp.a = coolDownAlpha;
+					cast1.color = temp;
 
+				} else if (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) {
+					coolDown2 = 0f;
+					Color temp = cast2.color;
+					temp.a = coolDownAlpha;
+					cast2.color = temp;
 
-				} else if (Input.GetKey(KeyCode.Alpha3) && !cast3) {
-
-
+				} else if (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax) {
+					coolDown3 = 0f;
+					Color temp = cast3.color;
+					temp.a = coolDownAlpha;
+					cast3.color = temp;
 				}
 
 				if (up && animate.GetInteger("PlayerState") != 9) {
@@ -219,6 +234,8 @@ public class PlayerController : MonoBehaviour {
 				} else if (right && animate.GetInteger("PlayerState") != 12) {
 					animate.SetInteger("PlayerState", 12);
 				}
+
+				StartCoroutine(AbilityUseCooldown());
 			}
 
 		// Invisibility input handler
@@ -269,12 +286,62 @@ public class PlayerController : MonoBehaviour {
 		StartCoroutine(InvisHandler());
 	}
 
+// Ability refresher
 	IEnumerator AbilityCooldowns() {
-		yield return new WaitForSeconds (0.25f);
+		yield return new WaitForSeconds (1.0f);
 
+		if (coolDown1 < coolDownMax) {
+			coolDown1 += coolDownMax/5f;
 
+			if (coolDown1 > coolDownMax) {
+				coolDown1 = coolDownMax;
+			}
+
+			if (coolDown1 == coolDownMax) {
+				Color temp = cast1.color;
+				temp.a = 1.0f;
+				cast1.color = temp;
+			}
+		}
+
+		if (coolDown2 < coolDownMax) {
+			coolDown2 += coolDownMax/5f;
+
+			if (coolDown2 > coolDownMax) {
+				coolDown2 = coolDownMax;
+			}
+
+			if (coolDown2 == coolDownMax) {
+				Color temp = cast2.color;
+				temp.a = 1.0f;
+				cast2.color = temp;
+			}
+		}
+
+		if (coolDown3 < coolDownMax) {
+			coolDown3 += coolDownMax/5f;
+
+			if (coolDown3 > coolDownMax) {
+				coolDown3 = coolDownMax;
+			}
+
+			if (coolDown3 == coolDownMax) {
+
+				Color temp = cast3.color;
+				temp.a = 1.0f;
+				cast3.color = temp;
+			}
+		}
 
 		StartCoroutine(AbilityCooldowns());
+	}
+
+	IEnumerator AbilityUseCooldown() {
+		yield return new WaitForSeconds (0.5f);
+
+		if (casting) {
+			casting = false;
+		}
 	}
 
 	IEnumerator DeadlineCounter() {
