@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 	public bool paused;
+	private bool casting;
 
 // Sprite Handling Variables
 	private GameObject deathSpriteObj;
 	private Animator animate;
 	private SpriteRenderer deathSprite;
+	private bool up, down, left, right;
 
 // Used for invisibility things; 5 second drain, 15 second refil
 	public bool invisible;
@@ -25,7 +27,9 @@ public class PlayerController : MonoBehaviour {
 
 // Start is called before the first frame update
 	void Start() {
-		paused = false;
+		paused = casting = false;
+
+		up = down = left = right = false;
 
 		deathSpriteObj = GameObject.Find("DeathSprite");
 		animate = deathSpriteObj.GetComponent<Animator>();
@@ -50,15 +54,29 @@ public class PlayerController : MonoBehaviour {
 	void Update() {
 
 	// Controls
-		if (!paused) {
+		if (!paused && !casting) {
 		// Movement stuff
 			if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
 			// Forward
 				vSpeed = moveSpeed;
 
+				if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) {
+					up = true;
+					down = false;
+					left = false;
+					right = false;
+				}
+
 			} else if (!Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S)) {
 			// Backward
 				vSpeed = -moveSpeed;
+
+				if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) {
+					up = false;
+					down = true;
+					left = false;
+					right = false;
+				}
 
 			} else {
 				vSpeed = 0.0f;
@@ -68,9 +86,23 @@ public class PlayerController : MonoBehaviour {
 			// Forward
 				hSpeed = moveSpeed;
 
+				if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
+					up = false;
+					down = false;
+					left = false;
+					right = true;
+				}
+
 			} else if (!Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A)) {
 			// Backward
 				hSpeed = -moveSpeed;
+
+				if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)) {
+					up = false;
+					down = false;
+					left = true;
+					right = false;
+				}
 
 			} else {
 				hSpeed = 0.0f;
@@ -84,8 +116,65 @@ public class PlayerController : MonoBehaviour {
 
 			transform.Translate(toMove * Time.deltaTime);
 
-		// Ability Casting
+		// Animate player moving and idle states
+			if ((vSpeed != 0.0f || hSpeed != 0.0f) && !invisible) {
+				if (up && animate.GetInteger("PlayerState") != 1) {
+					animate.SetInteger("PlayerState", 1);
 
+				} else if (down && animate.GetInteger("PlayerState") != 2) {
+					animate.SetInteger("PlayerState", 2);
+
+				} else if (left && animate.GetInteger("PlayerState") != 3) {
+					animate.SetInteger("PlayerState", 3);
+
+				} else if (right && animate.GetInteger("PlayerState") != 4) {
+					animate.SetInteger("PlayerState", 4);
+				}
+			} else if ((vSpeed != 0.0f || hSpeed != 0.0f) && invisible) {
+				if (up && animate.GetInteger("PlayerState") != 5) {
+					animate.SetInteger("PlayerState", 5);
+
+				} else if (down && animate.GetInteger("PlayerState") != 6) {
+					animate.SetInteger("PlayerState", 6);
+
+				} else if (left && animate.GetInteger("PlayerState") != 7) {
+					animate.SetInteger("PlayerState", 7);
+
+				} else if (right && animate.GetInteger("PlayerState") != 8) {
+					animate.SetInteger("PlayerState", 8);
+				}
+			} else {
+				if (up && animate.GetInteger("PlayerState") != 14) {
+					animate.SetInteger("PlayerState", 14);
+
+				} else if (down && animate.GetInteger("PlayerState") != 0) {
+					animate.SetInteger("PlayerState", 0);
+
+				} else if (left && animate.GetInteger("PlayerState") != 15) {
+					animate.SetInteger("PlayerState", 15);
+
+				} else if (right && animate.GetInteger("PlayerState") != 16) {
+					animate.SetInteger("PlayerState", 16);
+				}
+			}
+
+		// Ability Casting
+			if (Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Alpha3)) {
+				//casting = true;
+
+				if (up && animate.GetInteger("PlayerState") != 9) {
+					animate.SetInteger("PlayerState", 9);
+
+				} else if (down && animate.GetInteger("PlayerState") != 10) {
+					animate.SetInteger("PlayerState", 10);
+
+				} else if (left && animate.GetInteger("PlayerState") != 11) {
+					animate.SetInteger("PlayerState", 11);
+
+				} else if (right && animate.GetInteger("PlayerState") != 12) {
+					animate.SetInteger("PlayerState", 12);
+				}
+			}
 
 		// Invisibility input handler
 			if (Input.GetKey(KeyCode.LeftShift) && !invisCoolDown && invisPool > 0) {
