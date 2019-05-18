@@ -6,20 +6,30 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 	public bool paused;
 
+// Sprite Handling Variables
+	private GameObject deathSpriteObj;
+	private Animator animate;
+	private SpriteRenderer deathSprite;
+
 // Used for invisibility things; 5 second drain, 15 second refil
 	public bool invisible;
 	public Image stealthGauge;
+	public float invisAlpha;
 	private bool invisCoolDown;
 	private RectTransform stealthTransform;
 	private float invisPool, invisPoolMax, minGaugeX, maxGaugeX, gaugeY;
 
 // Used for movement
-	public float moveSpeed;
-	private float vSpeed, hSpeed;
+	public float baseSpeed, invisSpeed;
+	private float moveSpeed, vSpeed, hSpeed;
 
 // Start is called before the first frame update
 	void Start() {
 		paused = false;
+
+		deathSpriteObj = GameObject.Find("DeathSprite");
+		animate = deathSpriteObj.GetComponent<Animator>();
+		deathSprite = deathSpriteObj.GetComponent<SpriteRenderer>();
 
 		invisible = invisCoolDown = false;
 		invisPool = invisPoolMax = 100.0f;
@@ -30,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 		minGaugeX = stealthTransform.position.x;
 		maxGaugeX = stealthTransform.position.x - stealthTransform.rect.width;
 
-		moveSpeed = 2.5f;
+		moveSpeed = baseSpeed;
 		hSpeed = vSpeed = 0.0f;
 
 		StartCoroutine(InvisHandler());
@@ -74,13 +84,26 @@ public class PlayerController : MonoBehaviour {
 
 			transform.Translate(toMove * Time.deltaTime);
 
+		// Ability Casting
+
+
 		// Invisibility input handler
 			if (Input.GetKey(KeyCode.LeftShift) && !invisCoolDown && invisPool > 0) {
 				invisible = true;
+				moveSpeed = invisSpeed;
 				invisCoolDown = true;
+
+				Color temp = deathSprite.color;
+				temp.a = invisAlpha;
+				deathSprite.color = temp;
 
 			} else if (invisPool <= 0) {
 				invisible = false;
+				moveSpeed = baseSpeed;
+
+				Color temp = deathSprite.color;
+				temp.a = 1.0f;
+				deathSprite.color = temp;
 
 			} else if (invisPool == invisPoolMax && invisCoolDown) {
 				invisCoolDown = false;
