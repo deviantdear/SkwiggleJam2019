@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Call : MonoBehaviour
 {
+    public Patient patient;
+
     public SphereCollider col;
 
     
@@ -12,22 +14,33 @@ public class Call : MonoBehaviour
     public float ringLength;
     public int amountOfRings;
     public float additionalMult;
+    public float priority;
+
 
     [HideInInspector]
     public float mult;
-    // Start is called before the first frame update
-    void Start()
+
+
+
+    public void StartCall(float wellness)
     {
-        mult = 1f;
-        StartCoroutine(Expand());
+        StartCoroutine(Expand(wellness));
     }
 
-    IEnumerator Expand()
+
+
+    IEnumerator Expand(float wellness)
     {
+
+
+
+        patient.isCalling = true;
+
         int currentRing = 1;
         float testTimer = 0f;
         col.enabled = true;
         col.radius = 0f;
+        mult = wellness;
 
         while(currentRing <= amountOfRings)
         {
@@ -40,17 +53,39 @@ public class Call : MonoBehaviour
                 print("Entering ring " + currentRing + " at radius " + col.radius);
             }
             testTimer += Time.deltaTime;
+
             yield return null;
         }
 
         print("ending: " + testTimer + " seconds, " + col.radius + " length");
         col.enabled = false;
+        patient.isCalling = false;
         yield return null;
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        print("yeet " + mult);
+        if(other.gameObject.CompareTag("Nurse"))
+        {
+            var nurse = other.GetComponent<Nurse>();
+            if (nurse.state == State.Chart)
+            {
+                nurse.pointOfInterest = PointOfInterest.Patient;
+                nurse.focusedPatient = patient;
+                nurse.agent.SetDestination(transform.position);
+                nurse.priorityAwareness = mult;
+            }
+
+            if(nurse.priorityAwareness < mult && nurse.state == State.Move)
+            {
+                nurse.pointOfInterest = PointOfInterest.Patient;
+                nurse.focusedPatient = patient;
+                nurse.agent.SetDestination(transform.position);
+                nurse.priorityAwareness = mult;
+            }
+            
+            
+        }
     }
 }
