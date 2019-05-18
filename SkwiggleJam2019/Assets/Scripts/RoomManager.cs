@@ -24,7 +24,7 @@ public class RoomManager : MonoBehaviour
         int amtOfNurses = 2;
 
         var split = tempRooms.Count / amtOfNurses;
-        print(split);
+        //print(split);
 
         for (int i = 0; i < amtOfNurses; i++)
         {
@@ -35,13 +35,13 @@ public class RoomManager : MonoBehaviour
                 debug += tempRooms[rand];
                 tempRooms.RemoveAt(rand);
             }
-            print(debug);
+            //print(debug);
         }
 
         var remaining = tempRooms.Count;
         for (int i = 0; i < remaining; i++)
         {
-            print(tempRooms[i] + " to nurse " + Random.Range(0, amtOfNurses));
+            //print(tempRooms[i] + " to nurse " + Random.Range(0, amtOfNurses));
         }
     }
 }

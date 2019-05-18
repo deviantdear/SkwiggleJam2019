@@ -25,6 +25,7 @@ public class Call : MonoBehaviour
     public void StartCall(float wellness)
     {
         StartCoroutine(Expand(wellness));
+        print("hello world!");
     }
 
 
