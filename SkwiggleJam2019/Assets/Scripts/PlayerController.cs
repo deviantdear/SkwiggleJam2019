@@ -335,12 +335,12 @@ public class PlayerController : MonoBehaviour {
 			if (coolDown1 > coolDownMax) {
 				coolDown1 = coolDownMax;
 			}
+		}
 
-			if (coolDown1 == coolDownMax) {
-				Color temp = cast1.color;
-				temp.a = 1.0f;
-				cast1.color = temp;
-			}
+		if (coolDown1 == coolDownMax) {
+			Color temp = cast1.color;
+			temp.a = 1.0f;
+			cast1.color = temp;
 		}
 
 		if (coolDown2 < coolDownMax) {
@@ -349,12 +349,12 @@ public class PlayerController : MonoBehaviour {
 			if (coolDown2 > coolDownMax) {
 				coolDown2 = coolDownMax;
 			}
+		}
 
-			if (coolDown2 == coolDownMax) {
-				Color temp = cast2.color;
-				temp.a = 1.0f;
-				cast2.color = temp;
-			}
+		if (coolDown2 == coolDownMax) {
+			Color temp = cast2.color;
+			temp.a = 1.0f;
+			cast2.color = temp;
 		}
 
 		if (coolDown3 < coolDownMax) {
@@ -363,13 +363,13 @@ public class PlayerController : MonoBehaviour {
 			if (coolDown3 > coolDownMax) {
 				coolDown3 = coolDownMax;
 			}
+		}
 
-			if (coolDown3 == coolDownMax) {
+		if (coolDown3 == coolDownMax) {
 
-				Color temp = cast3.color;
-				temp.a = 1.0f;
-				cast3.color = temp;
-			}
+			Color temp = cast3.color;
+			temp.a = 1.0f;
+			cast3.color = temp;
 		}
 
 		StartCoroutine(AbilityCooldowns());
