@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour {
 	public Text timerText;
 	public bool paused;
 	public GameObject pauseCanvas;
-	private bool casting;
 	private GameObject failureCanvas, victoryCanvas;
 
 // Sprite Handling Variables
@@ -30,9 +29,12 @@ public class PlayerController : MonoBehaviour {
 	public float baseSpeed, invisSpeed;
 	private float moveSpeed, vSpeed, hSpeed;
 
+// Casting variables for Death's ailments
+	private bool casting, cast1, cast2, cast3;
+
 // Start is called before the first frame update
 	void Start() {
-		paused = casting = false;
+		paused = casting = cast1 = cast2 = cast3 = false;
 
 		pauseCanvas = GameObject.Find("PauseCanvas");
 		failureCanvas = GameObject.Find("FailureCanvas");
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 		moveSpeed = baseSpeed;
 		hSpeed = vSpeed = 0.0f;
 
-		if (deadline%60 > 0) {
+		if (deadline%60 > 9) {
 			timerText.text = deadline/60 + ":" + deadline%60;
 
 		} else {
@@ -192,8 +194,18 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		// Ability Casting
-			if (Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Alpha3)) {
-				//casting = true;
+			if ((Input.GetKey(KeyCode.Alpha1) && !cast1) || (Input.GetKey(KeyCode.Alpha2) && !cast2) || (Input.GetKey(KeyCode.Alpha3) && !cast3)) {
+				casting = true;
+				if (Input.GetKey(KeyCode.Alpha1) && !cast1) {
+					
+
+				} else if (Input.GetKey(KeyCode.Alpha2) && !cast2) {
+
+
+				} else if (Input.GetKey(KeyCode.Alpha3) && !cast3) {
+
+
+				}
 
 				if (up && animate.GetInteger("PlayerState") != 9) {
 					animate.SetInteger("PlayerState", 9);
@@ -269,7 +281,7 @@ public class PlayerController : MonoBehaviour {
 		yield return new WaitForSeconds (1.0f);
 
 		if (deadline > 0) {
-			if (deadline%60 > 0) {
+			if (deadline%60 > 9) {
 				timerText.text = deadline/60 + ":" + deadline%60;
 			
 			} else {
@@ -282,6 +294,8 @@ public class PlayerController : MonoBehaviour {
 			failureCanvas.SetActive(true);
 		}
 
-		StartCoroutine(DeadlineCounter());
+		if (deadline > 0) {
+			StartCoroutine(DeadlineCounter());
+		}
 	}
 }
