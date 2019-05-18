@@ -230,44 +230,50 @@ public class PlayerController : MonoBehaviour {
 			if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(facingDir), out seen, viewDistance)) {
 				GameObject seenObj = seen.collider.gameObject;
 
-				//if (seenObj.CompareTag("Patients")) {
-					if ((Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) || (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) || (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax)) {
-						casting = true;
+				//if (seenObj.CompareTag("Patient")) {
+					//Patient patientScript = seenObj.GetComponent<Patient>();
+					//if (!patientScript.hasIllness) {
+						if ((Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) || (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) || (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax)) {
+							casting = true;
 
-						if (Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) {
-							coolDown1 = 0f;
-							Color temp = cast1.color;
-							temp.a = coolDownAlpha;
-							cast1.color = temp;
+							if (Input.GetKey(KeyCode.Alpha1) && coolDown1 == coolDownMax) {
+								coolDown1 = 0f;
+								Color temp = cast1.color;
+								temp.a = coolDownAlpha;
+								cast1.color = temp;
+								//patientScript.illness = Infection;
 
-						} else if (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) {
-							coolDown2 = 0f;
-							Color temp = cast2.color;
-							temp.a = coolDownAlpha;
-							cast2.color = temp;
+							} else if (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) {
+								coolDown2 = 0f;
+								Color temp = cast2.color;
+								temp.a = coolDownAlpha;
+								cast2.color = temp;
+								//patientScript.illness = HeartAttack;
 
-						} else if (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax) {
-							coolDown3 = 0f;
-							Color temp = cast3.color;
-							temp.a = coolDownAlpha;
-							cast3.color = temp;
+							} else if (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax) {
+								coolDown3 = 0f;
+								Color temp = cast3.color;
+								temp.a = coolDownAlpha;
+								cast3.color = temp;
+								//patientScript.illness = Stroke;
+							}
+
+							if (up && animate.GetInteger("PlayerState") != 9) {
+								animate.SetInteger("PlayerState", 9);
+
+							} else if (down && animate.GetInteger("PlayerState") != 10) {
+								animate.SetInteger("PlayerState", 10);
+
+							} else if (left && animate.GetInteger("PlayerState") != 11) {
+								animate.SetInteger("PlayerState", 11);
+
+							} else if (right && animate.GetInteger("PlayerState") != 12) {
+								animate.SetInteger("PlayerState", 12);
+							}
+
+							StartCoroutine(AbilityUseCooldown());
 						}
-
-						if (up && animate.GetInteger("PlayerState") != 9) {
-							animate.SetInteger("PlayerState", 9);
-
-						} else if (down && animate.GetInteger("PlayerState") != 10) {
-							animate.SetInteger("PlayerState", 10);
-
-						} else if (left && animate.GetInteger("PlayerState") != 11) {
-							animate.SetInteger("PlayerState", 11);
-
-						} else if (right && animate.GetInteger("PlayerState") != 12) {
-							animate.SetInteger("PlayerState", 12);
-						}
-
-						StartCoroutine(AbilityUseCooldown());
-					}
+					//}
 				//}
 			}
 
