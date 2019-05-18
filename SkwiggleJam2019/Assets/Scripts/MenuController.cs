@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour {
 	private int nextScene;
+	private GameObject player;
+	private PlayerController playerScript;
 
 // Start is called before the first frame update
 	void Start() {
@@ -12,6 +14,12 @@ public class MenuController : MonoBehaviour {
 
 		if (nextScene > 5) { // Change "5" to whatever the max number of scenes is - 1
 			nextScene = 0;
+		}
+
+		player = GameObject.FindGameObjectWithTag("Player");
+
+		if (player != null) {
+			playerScript = player.GetComponent<PlayerController>();
 		}
 	}
 
@@ -25,7 +33,9 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void Resume() {
-		
+		playerScript.paused = false;
+		Time.timeScale = 1.0f;
+		playerScript.pauseCanvas.SetActive(false);
 	}
 
 	public void ExitToTitle() {

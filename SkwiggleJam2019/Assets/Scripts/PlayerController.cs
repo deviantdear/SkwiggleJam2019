@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+// Meta Variables: Things like game states and menus and the DEADLINE TIMER
+	public int deadline;
+	public Text timerText;
 	public bool paused;
+	public GameObject pauseCanvas;
 	private bool casting;
+	private GameObject failureCanvas, victoryCanvas;
 
 // Sprite Handling Variables
 	private GameObject deathSpriteObj;
@@ -29,6 +34,14 @@ public class PlayerController : MonoBehaviour {
 	void Start() {
 		paused = casting = false;
 
+		pauseCanvas = GameObject.Find("PauseCanvas");
+		failureCanvas = GameObject.Find("FailureCanvas");
+		victoryCanvas = GameObject.Find("VictoryCanvas");
+
+		pauseCanvas.SetActive(false);
+		failureCanvas.SetActive(false);
+		victoryCanvas.SetActive(false);
+
 		up = down = left = right = false;
 
 		deathSpriteObj = GameObject.Find("DeathSprite");
@@ -47,11 +60,31 @@ public class PlayerController : MonoBehaviour {
 		moveSpeed = baseSpeed;
 		hSpeed = vSpeed = 0.0f;
 
+		if (deadline%60 > 0) {
+			timerText.text = deadline/60 + ":" + deadline%60;
+
+		} else {
+			timerText.text = deadline/60 + ":0" + deadline%60;
+		}
+
 		StartCoroutine(InvisHandler());
+
+		StartCoroutine(DeadlineCounter());
 	}
 
 // Update is called once per frame
 	void Update() {
+	// Pause Button
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			paused = !paused;
+			pauseCanvas.SetActive(paused);
+
+			if (paused) {
+				Time.timeScale = 0.0f;
+			} else {
+				Time.timeScale = 1.0f;
+			}
+		}
 
 	// Controls
 		if (!paused && !casting) {
@@ -222,5 +255,33 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		StartCoroutine(InvisHandler());
+	}
+
+	IEnumerator AbilityCooldowns() {
+		yield return new WaitForSeconds (0.25f);
+
+
+
+		StartCoroutine(AbilityCooldowns());
+	}
+
+	IEnumerator DeadlineCounter() {
+		yield return new WaitForSeconds (1.0f);
+
+		if (deadline > 0) {
+			if (deadline%60 > 0) {
+				timerText.text = deadline/60 + ":" + deadline%60;
+			
+			} else {
+				timerText.text = deadline/60 + ":0" + deadline%60;
+			}
+			deadline--;
+
+		} else {
+			Time.timeScale = 0.0f;
+			failureCanvas.SetActive(true);
+		}
+
+		StartCoroutine(DeadlineCounter());
 	}
 }
