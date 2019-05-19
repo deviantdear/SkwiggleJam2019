@@ -17,6 +17,10 @@ public class Nurse : MonoBehaviour
 
     public float mournTime = 5f;
     float mournTimer;
+
+
+    public List<Patient> assignedPatients;
+
     private void Start()
     {
         state = State.Chart;
@@ -34,9 +38,7 @@ public class Nurse : MonoBehaviour
                 state = State.Move;
             }
         }
-
-
-        if (state == State.Move)
+        else if (state == State.Move)
         {
             if(agent.remainingDistance < 2f)
             {
@@ -61,8 +63,7 @@ public class Nurse : MonoBehaviour
                 pointOfInterest = PointOfInterest.None;
             }
         }
-
-        if (state == State.Heal)
+        else if (state == State.Heal)
         {
             focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * 3f, 0, focusedPatient.maxHealth);
 
@@ -72,12 +73,11 @@ public class Nurse : MonoBehaviour
                 agent.isStopped = false;
                 pointOfInterest = PointOfInterest.Computer;
                 agent.SetDestination(Vector3.zero);
+                priorityAwareness = 0f;
             }
 
         }
-
-
-        if (state == State.Mourn)
+        else if (state == State.Mourn)
         {
             mournTimer += Time.deltaTime;
 
@@ -87,6 +87,7 @@ public class Nurse : MonoBehaviour
                 agent.isStopped = false;
                 pointOfInterest = PointOfInterest.Computer;
                 agent.SetDestination(Vector3.zero);
+                priorityAwareness = 0f;
             }
 
         }
