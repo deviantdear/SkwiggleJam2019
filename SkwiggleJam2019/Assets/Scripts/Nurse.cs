@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum State { Red, Move, Chart, Mourn, Heal}
+public enum State { Red, Move, Chart, Mourn, Heal, Rove}
 public enum PointOfInterest { None, Patient, Computer}
 
 public class Nurse : MonoBehaviour
@@ -12,17 +12,19 @@ public class Nurse : MonoBehaviour
     public PointOfInterest pointOfInterest;
     public State state;
     public Patient focusedPatient;
-
     public float priorityAwareness;
-
-    public float mournTime = 5f;
+    public List<Patient> assignedPatients;
+    [Header("SET THE VARIABLES BELOW")]
+    public float healRate;
+    public float mournTime;
     float mournTimer;
 
 
-    public List<Patient> assignedPatients;
+   
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         state = State.Chart;
     }
 
@@ -65,14 +67,14 @@ public class Nurse : MonoBehaviour
         }
         else if (state == State.Heal)
         {
-            focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * 3f, 0, focusedPatient.maxHealth);
+            focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * healRate, 0, focusedPatient.maxHealth);
 
             if (focusedPatient.health == focusedPatient.maxHealth)
             {
                 state = State.Move;
                 agent.isStopped = false;
                 pointOfInterest = PointOfInterest.Computer;
-                agent.SetDestination(Vector3.zero);
+                agent.SetDestination(RoomManager.instance.ClosestDesk(transform.position));
                 priorityAwareness = 0f;
             }
 
@@ -83,10 +85,11 @@ public class Nurse : MonoBehaviour
 
             if(mournTimer >= mournTime)
             {
+                mournTimer = 0f;
                 state = State.Move;
                 agent.isStopped = false;
                 pointOfInterest = PointOfInterest.Computer;
-                agent.SetDestination(Vector3.zero);
+                agent.SetDestination(RoomManager.instance.ClosestDesk(transform.position));
                 priorityAwareness = 0f;
             }
 

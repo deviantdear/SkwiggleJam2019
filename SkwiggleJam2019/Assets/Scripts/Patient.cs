@@ -10,15 +10,18 @@ public class Patient : MonoBehaviour
     // the system that makes a call to nurses
     Call call;
 
-    public float sickeningRate;
-    public float recoveryRate;
-
 
     // is the patient making a call?
     public bool isCalling;
+    public float health;
+
+
+    [Header("SET THE VARIABLES BELOW")]
+    public float sickeningRate;
+    public float recoveryRate;
 
     public float maxHealth;
-    public float health;
+
 
     // get the player's condition
     public Wellness condition
@@ -35,18 +38,25 @@ public class Patient : MonoBehaviour
 
 
     // increase the priorities based on the wellness
-    public float[] wellnessPriorities;
+    float[] wellnessPriorities;
 
     
 
 
     private void Start()
     {
+
+        health = maxHealth;
         call = GetComponent<Call>();
+
+        wellnessPriorities = new float[4] {1,2,3,5};
     }
 
     private void Update()
     {
+        // deplete health
+        health -= Time.deltaTime * sickeningRate;
+
         // if the patient is not making a call && is not dead
         if(!isCalling && condition != Wellness.Death)
         {

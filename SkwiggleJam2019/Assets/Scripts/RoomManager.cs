@@ -56,6 +56,18 @@ public class RoomManager : MonoBehaviour
     }
     public Vector3 ClosestDesk(Vector3 pos)
     {
-        return Vector3.zero;
+        float shortestDist = 100f;
+        Vector3 shortestPoint = pos;
+        foreach (var item in desks)
+        {
+            var distBetween = Vector3.Distance(item.position, pos);
+            if (distBetween < shortestDist)
+            {
+                shortestDist = distBetween;
+                shortestPoint = item.position;
+            }
+        }
+
+        return shortestPoint;
     }
 }

@@ -69,18 +69,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ecc533aaf13764aaa8e9b8ab573057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  illness: 0
-  sickeningRate: 1
-  recoveryRate: 1
-  recovery: 0
   isCalling: 0
-  maxHealth: 10
   health: 10
-  wellnessPriorities:
-  - 1
-  - 2
-  - 3
-  - 5
+  sickeningRate: 3
+  recoveryRate: 1
+  maxHealth: 10
 --- !u!114 &3026982467178994477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +92,6 @@ MonoBehaviour:
   ringLength: 20
   amountOfRings: 4
   additionalMult: 0.3
-  priority: 0
   mult: 0
 --- !u!135 &3026982467178994476
 SphereCollider:
