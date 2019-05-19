@@ -74,13 +74,9 @@ public class Nurse : MonoBehaviour
         }
         else if (state == State.Heal)
         {
-<<<<<<< HEAD
 			healing.SetActive(true);
 
-            focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * 3f, 0, focusedPatient.maxHealth);
-=======
             focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * healRate, 0, focusedPatient.maxHealth);
->>>>>>> feature-pathfinding
 
             if (focusedPatient.health == focusedPatient.maxHealth)
             {
