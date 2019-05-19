@@ -14,7 +14,7 @@ public class Call : MonoBehaviour
     public float ringLength;
     public int amountOfRings;
     public float additionalMult;
-    public float priority;
+    //public float priority;
 
 
     [HideInInspector]
@@ -25,7 +25,6 @@ public class Call : MonoBehaviour
     public void StartCall(float wellness)
     {
         StartCoroutine(Expand(wellness));
-        print("hello world!");
     }
 
 
@@ -67,10 +66,10 @@ public class Call : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Nurse"))
+        if (other.gameObject.CompareTag("Nurse"))
         {
             var nurse = other.GetComponent<Nurse>();
-
+            
             if (nurse.assignedPatients.Contains(patient))
                 mult *= 3f;
 
@@ -82,15 +81,27 @@ public class Call : MonoBehaviour
                 nurse.priorityAwareness = mult;
             }
 
-            if(nurse.priorityAwareness < mult)
+            if (nurse.priorityAwareness < mult)
             {
                 nurse.pointOfInterest = PointOfInterest.Patient;
                 nurse.focusedPatient = patient;
                 nurse.agent.SetDestination(transform.position);
                 nurse.priorityAwareness = mult;
             }
-            
-            
+
+
+        }
+
+        if (other.gameObject.CompareTag("Doctor"))
+        {
+            var doctor = other.GetComponent<Doctor>();
+            if(mult > doctor.priorityAwareness)
+            {
+                doctor.pointOfInterest = PointOfInterest.Patient;
+                doctor.focusedPatient = patient;
+                doctor.agent.SetDestination(transform.position);
+                doctor.priorityAwareness = mult;
+            }
         }
     }
 }

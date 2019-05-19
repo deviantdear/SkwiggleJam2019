@@ -2331,6 +2331,10 @@ MonoBehaviour:
   nurses:
   - {fileID: 1411619365}
   - {fileID: 1278583516}
+  desks:
+  - {fileID: 497197170}
+  - {fileID: 162007352}
+  - {fileID: 1638986684}
 --- !u!1 &1084817827
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,7 +3832,7 @@ GameObject:
   - component: {fileID: 1657064053}
   - component: {fileID: 1657064052}
   m_Layer: 0
-  m_Name: Desk (3)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4558,6 +4562,75 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1001 &2005455904626497731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3192562238748526332, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_Name
+      value: Nurse (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192562238748526321, guid: 0968cbd95a7e15a43a7a3a7138367c8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0968cbd95a7e15a43a7a3a7138367c8d, type: 3}
 --- !u!1001 &3026982466748368996
 PrefabInstance:
   m_ObjectHideFlags: 0

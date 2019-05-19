@@ -12,20 +12,22 @@ public class Nurse : MonoBehaviour
     public PointOfInterest pointOfInterest;
     public State state;
     public Patient focusedPatient;
-
     public float priorityAwareness;
-
-    public float mournTime = 5f;
+    public List<Patient> assignedPatients;
+    [Header("SET THE VARIABLES BELOW")]
+    public float healRate;
+    public float mournTime;
     float mournTimer;
 
 
-    public List<Patient> assignedPatients;
+   
 
 	public GameObject healing, crying;
 	public bool fear;
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         state = State.Chart;
 
 		healing.SetActive(false);
@@ -72,16 +74,20 @@ public class Nurse : MonoBehaviour
         }
         else if (state == State.Heal)
         {
+<<<<<<< HEAD
 			healing.SetActive(true);
 
             focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * 3f, 0, focusedPatient.maxHealth);
+=======
+            focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * healRate, 0, focusedPatient.maxHealth);
+>>>>>>> feature-pathfinding
 
             if (focusedPatient.health == focusedPatient.maxHealth)
             {
                 state = State.Move;
                 agent.isStopped = false;
                 pointOfInterest = PointOfInterest.Computer;
-                agent.SetDestination(Vector3.zero);
+                agent.SetDestination(RoomManager.instance.ClosestDesk(transform.position));
                 priorityAwareness = 0f;
             }
 
@@ -94,10 +100,11 @@ public class Nurse : MonoBehaviour
 
             if(mournTimer >= mournTime)
             {
+                mournTimer = 0f;
                 state = State.Move;
                 agent.isStopped = false;
                 pointOfInterest = PointOfInterest.Computer;
-                agent.SetDestination(Vector3.zero);
+                agent.SetDestination(RoomManager.instance.ClosestDesk(transform.position));
                 priorityAwareness = 0f;
             }
 
