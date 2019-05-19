@@ -74,6 +74,8 @@ MonoBehaviour:
   sickeningRate: 3
   recoveryRate: 1
   maxHealth: 10
+  illness: 0
+  presentNurse: 0
 --- !u!114 &3026982467178994477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,10 +90,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patient: {fileID: 3026982467178994478}
   col: {fileID: 3026982467178994476}
-  seconds: 5
-  ringLength: 20
+  seconds: 3
+  ringLength: 30
   amountOfRings: 4
-  additionalMult: 0.3
+  additionalMult: 0.5
   mult: 0
 --- !u!135 &3026982467178994476
 SphereCollider:
