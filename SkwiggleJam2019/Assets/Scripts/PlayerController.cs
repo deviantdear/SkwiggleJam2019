@@ -325,6 +325,21 @@ public class PlayerController : MonoBehaviour {
 		StartCoroutine(InvisHandler());
 	}
 
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.CompareTag("Nurse")) {
+			Transform t = other.gameObject.transform;
+
+			while (t.parent != null) {
+				if (t.parent.tag == "Nurse") {
+					Nurse nurseScript = t.parent.GetComponent<Nurse>();
+					nurseScript.fear = true;
+				}
+
+				t = t.parent.transform;
+			}
+		}
+	}
+
 // Ability refresher
 	IEnumerator AbilityCooldowns() {
 		yield return new WaitForSeconds (1.0f);

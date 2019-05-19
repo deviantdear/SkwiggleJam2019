@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2463615319205013332}
   m_Layer: 0
   m_Name: NurseSightCone
-  m_TagString: Untagged
+  m_TagString: Nurse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9814,6 +9814,9 @@ MonoBehaviour:
   focusedPatient: {fileID: 0}
   priorityAwareness: 0
   mournTime: 5
+  assignedPatients: []
+  healing: {fileID: 2949069416797886644}
+  crying: {fileID: 3146559603452904134}
 --- !u!1 &3901599208484298026
 GameObject:
   m_ObjectHideFlags: 0
