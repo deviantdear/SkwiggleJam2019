@@ -90,8 +90,10 @@ MonoBehaviour:
   state: 0
   focusedPatient: {fileID: 0}
   priorityAwareness: 0
-  mournTime: 5
   assignedPatients: []
+  healRate: 0
+  baseHeal: 0
+  mournTime: 5
   healing: {fileID: 6350788538600647864}
   crying: {fileID: 9076267882408274110}
   fear: 0
@@ -267,7 +269,7 @@ GameObject:
   - component: {fileID: 6834334242464654532}
   m_Layer: 0
   m_Name: NurseSightCone
-  m_TagString: Untagged
+  m_TagString: NurseSight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -437,6 +439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HealingParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921367485179582014, guid: ec2d2c5d6a7a5c74682b2d9150f6a013,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3921367485179582013, guid: ec2d2c5d6a7a5c74682b2d9150f6a013,
         type: 3}

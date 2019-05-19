@@ -23,6 +23,7 @@ public class Patient : MonoBehaviour
 	public Illness illness;
 	public bool presentNurse;
 	private float baseRecovery, baseSickening;
+	public bool isTarget;
 
     // get the player's condition
     public Wellness condition
@@ -51,7 +52,7 @@ public class Patient : MonoBehaviour
 
 		presentNurse = false;
 
-		baseRecovery = baseSickening = Random.Range(0, 3);
+		baseRecovery = baseSickening = Random.Range(1, 3);
 
 		StartCoroutine(Dying());
     }
@@ -84,14 +85,16 @@ public class Patient : MonoBehaviour
             if (health / maxHealth < 0.75f)
                 // assign a call with a priority value based on condition
                 call.StartCall(wellnessPriorities[Mathf.Clamp((int)condition,0,wellnessPriorities.Length-1)]);
-        }
+		} else if (condition == Wellness.Death && isTarget) {
+
+
+		}
     }
 
 	IEnumerator Dying() {
 		yield return new WaitForSeconds (1.0f);
 
 		if (presentNurse && health < maxHealth) {
-
 			if (health > maxHealth) {
 				health = maxHealth;
 			}
