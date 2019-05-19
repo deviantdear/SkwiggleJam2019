@@ -107,8 +107,10 @@ public class Doctor : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, item.transform.position) < 3f)
             {
-                item.healRate *= 1.5f;
-            }
+                item.healRate = item.baseHeal * 1.5f;
+			} else {
+				item.healRate = item.baseHeal;
+			}
         
         }
 

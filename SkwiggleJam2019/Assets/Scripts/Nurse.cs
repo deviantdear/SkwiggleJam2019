@@ -15,7 +15,8 @@ public class Nurse : MonoBehaviour
     public float priorityAwareness;
     public List<Patient> assignedPatients;
     [Header("SET THE VARIABLES BELOW")]
-    public float healRate;
+	public float healRate;
+	public float baseHeal;
     public float mournTime;
     float mournTimer;
 
@@ -77,6 +78,7 @@ public class Nurse : MonoBehaviour
 			healing.SetActive(true);
 
             focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * healRate, 0, focusedPatient.maxHealth);
+			focusedPatient.presentNurse = true;
 
             if (focusedPatient.health == focusedPatient.maxHealth)
             {
@@ -85,6 +87,9 @@ public class Nurse : MonoBehaviour
                 pointOfInterest = PointOfInterest.Computer;
                 agent.SetDestination(RoomManager.instance.ClosestDesk(transform.position));
                 priorityAwareness = 0f;
+
+				healing.SetActive(false);
+				focusedPatient.presentNurse = false;
             }
 
         }
@@ -102,14 +107,9 @@ public class Nurse : MonoBehaviour
                 pointOfInterest = PointOfInterest.Computer;
                 agent.SetDestination(RoomManager.instance.ClosestDesk(transform.position));
                 priorityAwareness = 0f;
+				crying.SetActive(false);
             }
 
         }
-
-		if (state != State.Heal) {
-			healing.SetActive(false);
-		} else if (state != State.Mourn) {
-			crying.SetActive(false);
-		}
     }
 }

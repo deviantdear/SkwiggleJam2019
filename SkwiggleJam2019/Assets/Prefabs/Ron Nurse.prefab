@@ -165,10 +165,14 @@ MonoBehaviour:
   pointOfInterest: 0
   state: 2
   focusedPatient: {fileID: 0}
-  healRate: 3
   priorityAwareness: 0
-  mournTime: 5
   assignedPatients: []
+  healRate: 0
+  baseHeal: 5
+  mournTime: 5
+  healing: {fileID: 0}
+  crying: {fileID: 0}
+  fear: 0
 --- !u!54 &4006670905563200193
 Rigidbody:
   m_ObjectHideFlags: 0
