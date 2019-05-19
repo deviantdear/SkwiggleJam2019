@@ -10,17 +10,28 @@ public class Patient : MonoBehaviour
     // the system that makes a call to nurses
     Call call;
 
-    public float sickeningRate;
-    public float recoveryRate;
+    public float sickeningRate; 
+    public float recoveryRate; 
 
 
     // is the patient making a call?
     public bool isCalling;
 
     public float maxHealth;
+    public float minStartHealth = 50;
     public float health;
 
-    // get the player's condition
+    void Start()
+    {
+        //Assigns random values at start 
+        sickeningRate = Random.value(1, 3);
+        recoveryRate = Random.value(1, 3);
+        maxHealth = Random.value(70, 100);
+        health = Random.value(minStartHealth, maxHealth);
+
+    }
+
+    // get the patient's condition
     public Wellness condition
     {
         get
@@ -37,9 +48,6 @@ public class Patient : MonoBehaviour
     // increase the priorities based on the wellness
     public float[] wellnessPriorities;
 
-    
-
-
     private void Start()
     {
         call = GetComponent<Call>();
@@ -55,4 +63,6 @@ public class Patient : MonoBehaviour
                 call.StartCall(wellnessPriorities[Mathf.Clamp((int)condition,0,wellnessPriorities.Length-1)]);
         }
     }
+
+
 }
