@@ -21,9 +21,16 @@ public class Nurse : MonoBehaviour
 
     public List<Patient> assignedPatients;
 
+	public GameObject healing, crying;
+	public bool fear;
+
     private void Start()
     {
         state = State.Chart;
+
+		healing.SetActive(false);
+		crying.SetActive(false);
+		fear = false;
     }
 
     private void Update()
@@ -65,6 +72,8 @@ public class Nurse : MonoBehaviour
         }
         else if (state == State.Heal)
         {
+			healing.SetActive(true);
+
             focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * 3f, 0, focusedPatient.maxHealth);
 
             if (focusedPatient.health == focusedPatient.maxHealth)
@@ -79,6 +88,8 @@ public class Nurse : MonoBehaviour
         }
         else if (state == State.Mourn)
         {
+			crying.SetActive(true);
+
             mournTimer += Time.deltaTime;
 
             if(mournTimer >= mournTime)
@@ -91,5 +102,11 @@ public class Nurse : MonoBehaviour
             }
 
         }
+
+		if (state != State.Heal) {
+			healing.SetActive(false);
+		} else if (state != State.Mourn) {
+			crying.SetActive(false);
+		}
     }
 }
