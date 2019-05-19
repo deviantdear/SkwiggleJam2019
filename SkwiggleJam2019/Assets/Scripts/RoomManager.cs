@@ -5,7 +5,10 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager instance;
-    public List<Transform> rooms;
+    public List<Patient> patients;
+    public List<Nurse> nurses;
+    public List<Transform> desks;
+
 
     private void Awake()
     {
@@ -20,10 +23,11 @@ public class RoomManager : MonoBehaviour
     void AssignRooms()
     {
         // 8 rooms minimum
-        List<Transform> tempRooms = new List<Transform>(rooms);
-        int amtOfNurses = 2;
+        List<Patient> tempPatients = new List<Patient>(patients);
+        int amtOfNurses = nurses.Count;
+        print("amount of nurses " + amtOfNurses);
 
-        var split = tempRooms.Count / amtOfNurses;
+        var split = tempPatients.Count / amtOfNurses;
         //print(split);
 
         for (int i = 0; i < amtOfNurses; i++)
@@ -31,17 +35,27 @@ public class RoomManager : MonoBehaviour
             string debug = "nurse " + i + ": ";
             for (int j = 0; j < split; j++)
             {
-                int rand = Random.Range(0, tempRooms.Count);
-                debug += tempRooms[rand];
-                tempRooms.RemoveAt(rand);
+                int rand = Random.Range(0, tempPatients.Count);
+                debug += tempPatients[rand];
+                nurses[i].assignedPatients.Add(tempPatients[rand]);
+                tempPatients.RemoveAt(rand);
             }
-            //print(debug);
+            print(debug);
         }
 
-        var remaining = tempRooms.Count;
+        var remaining = tempPatients.Count;
         for (int i = 0; i < remaining; i++)
         {
-            //print(tempRooms[i] + " to nurse " + Random.Range(0, amtOfNurses));
+            nurses[Random.Range(0, amtOfNurses)].assignedPatients.Add(tempPatients[i]);
+
+            print(tempPatients[i] + " to nurse " + Random.Range(0, amtOfNurses));
         }
+
+
+        
+    }
+    public Vector3 ClosestDesk(Vector3 pos)
+    {
+        return Vector3.zero;
     }
 }

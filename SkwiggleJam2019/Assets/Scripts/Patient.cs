@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Illness { None, Infection, HeartAttack, Stroke, Yes}
 public enum Wellness { Healthy, Unwell, Sick, CodeRed, Death}
+
+
 public class Patient : MonoBehaviour
 {
+    // the system that makes a call to nurses
     Call call;
-
-    public Illness illness;
-
-    public bool hasIllness { get { return illness != Illness.None ? true : false; } }
 
     public float sickeningRate;
     public float recoveryRate;
 
+
+    // is the patient making a call?
     public bool isCalling;
 
     public float maxHealth;
     public float health;
 
+    // get the player's condition
     public Wellness condition
     {
         get
@@ -33,8 +34,10 @@ public class Patient : MonoBehaviour
     }
 
 
+    // increase the priorities based on the wellness
     public float[] wellnessPriorities;
 
+    
 
 
     private void Start()
@@ -44,13 +47,12 @@ public class Patient : MonoBehaviour
 
     private void Update()
     {
-        // if the patient is not making a call
+        // if the patient is not making a call && is not dead
         if(!isCalling && condition != Wellness.Death)
         {
-            if (health / maxHealth < 0.8f)
+            if (health / maxHealth < 0.75f)
+                // assign a call with a priority value based on condition
                 call.StartCall(wellnessPriorities[Mathf.Clamp((int)condition,0,wellnessPriorities.Length-1)]);
         }
-
-        health -= Time.deltaTime / 3f;
     }
 }

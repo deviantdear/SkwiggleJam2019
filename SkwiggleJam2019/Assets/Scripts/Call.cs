@@ -70,6 +70,10 @@ public class Call : MonoBehaviour
         if(other.gameObject.CompareTag("Nurse"))
         {
             var nurse = other.GetComponent<Nurse>();
+
+            if (nurse.assignedPatients.Contains(patient))
+                mult *= 3f;
+
             if (nurse.state == State.Chart)
             {
                 nurse.pointOfInterest = PointOfInterest.Patient;
@@ -78,7 +82,7 @@ public class Call : MonoBehaviour
                 nurse.priorityAwareness = mult;
             }
 
-            if(nurse.priorityAwareness < mult && nurse.state == State.Move)
+            if(nurse.priorityAwareness < mult)
             {
                 nurse.pointOfInterest = PointOfInterest.Patient;
                 nurse.focusedPatient = patient;
