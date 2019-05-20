@@ -17,6 +17,9 @@ public class RoomManager : MonoBehaviour
 
     private void Start()
     {
+		//patients.AddRange(GameObject.FindGameObjectsWithTag("Patient"));
+		//nurses.AddRange(GameObject.FindGameObjectsWithTag("Nurse"));
+		//desks.AddRange(GameObject.FindGameObjectsWithTag("Desk"));
         AssignRooms();
     }
 
