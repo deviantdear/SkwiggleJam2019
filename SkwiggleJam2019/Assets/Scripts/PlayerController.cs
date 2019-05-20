@@ -41,6 +41,10 @@ public class PlayerController : MonoBehaviour {
 	private RaycastHit seen;
 	private Vector3 facingDir;
 
+	void Awake() {
+		Time.timeScale = 1.0f;
+	}
+
 // Start is called before the first frame update
 	void Start() {
 		speaker = this.GetComponent<AudioSource>();

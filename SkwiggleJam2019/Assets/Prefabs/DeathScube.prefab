@@ -1448,9 +1448,9 @@ MonoBehaviour:
   cast1: {fileID: 7620009060350220215}
   cast2: {fileID: 7620009061667778905}
   cast3: {fileID: 7620009060300337294}
-  castCooldown1: 15
-  castCooldown2: 5
-  castCooldown3: 7
+  castCooldown1: 20
+  castCooldown2: 10
+  castCooldown3: 10
 --- !u!54 &7620009060264662447
 Rigidbody:
   m_ObjectHideFlags: 0
