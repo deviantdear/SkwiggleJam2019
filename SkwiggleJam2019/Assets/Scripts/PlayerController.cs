@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	private Animator animate;
 	private SpriteRenderer deathSprite;
 	private bool up, down, left, right;
+    private SpriteRenderer spriteRenderer;
 
 // Used for invisibility things; 5 second drain, 15 second refil
 	public bool invisible;
@@ -58,8 +59,10 @@ public class PlayerController : MonoBehaviour {
 		deathSpriteObj = GameObject.Find("DeathSprite");
 		animate = deathSpriteObj.GetComponent<Animator>();
 		deathSprite = deathSpriteObj.GetComponent<SpriteRenderer>();
+        spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
 
-		invisible = invisCoolDown = false;
+
+        invisible = invisCoolDown = false;
 		invisPool = invisPoolMax = 100.0f;
 
 		stealthTransform = stealthGauge.GetComponent<RectTransform>();
@@ -120,8 +123,8 @@ public class PlayerController : MonoBehaviour {
 					up = true;
 					down = false;
 					left = false;
-					right = false;
-				}
+					right = false;          
+                }
 
 			} else if (!Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S)) {
 			// Backward
@@ -147,9 +150,10 @@ public class PlayerController : MonoBehaviour {
 					down = false;
 					left = false;
 					right = true;
-				}
+                    spriteRenderer.flipX = false; //toggles sprite left and right
+                }
 
-			} else if (!Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A)) {
+            } else if (!Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A)) {
 			// Backward
 				hSpeed = -moveSpeed;
 
@@ -158,7 +162,8 @@ public class PlayerController : MonoBehaviour {
 					down = false;
 					left = true;
 					right = false;
-				}
+                    spriteRenderer.flipX = true; //toggles sprite left and right
+                }
 
 			} else {
 				hSpeed = 0.0f;
