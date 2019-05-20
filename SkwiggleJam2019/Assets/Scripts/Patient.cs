@@ -67,7 +67,7 @@ public class Patient : MonoBehaviour
 		if (health > maxHealth) {
 			health = maxHealth;
 		}
-		if (health >= maxHealth) {
+		if (health >= 95.0f) {
 			illness = Illness.None;
 		}
 
