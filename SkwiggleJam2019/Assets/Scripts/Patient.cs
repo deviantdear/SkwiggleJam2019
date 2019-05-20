@@ -25,6 +25,7 @@ public class Patient : MonoBehaviour
 	private float baseRecovery, baseSickening;
 	public bool isTarget;
 	private GameObject victoryCanvas;
+	public GameObject targetSpr, illParticles;
 
     // get the player's condition
     public Wellness condition
@@ -47,8 +48,7 @@ public class Patient : MonoBehaviour
 		victoryCanvas = GameObject.Find("VictoryCanvas");
 	}
 
-    private void Start()
-    {
+	private void Start() {
 		illness = Illness.None;
         health = maxHealth = 100f;
         call = GetComponent<Call>();
@@ -58,10 +58,15 @@ public class Patient : MonoBehaviour
 		presentNurse = false;
 
 		baseRecovery = baseSickening = Random.Range(1, 3);
+
+		if (!isTarget) {
+			targetSpr.SetActive(false);
+		}
+		illParticles.SetActive(false);
     }
 
     private void Update() {
-        // deplete health
+    // deplete health
         health -= Time.deltaTime * sickeningRate;
 
 		if (health > maxHealth) {
@@ -69,19 +74,23 @@ public class Patient : MonoBehaviour
 		}
 		if (health >= 95.0f) {
 			illness = Illness.None;
+			illParticles.SetActive(false);
 		}
 
 		if (illness == Illness.Infection) {
 			recoveryRate = 2f;
 			sickeningRate = 4f;
+			illParticles.SetActive(true);
 
 		} else if (illness == Illness.HeartAttack) {
 			recoveryRate = 4f;
 			sickeningRate = 4f;
+			illParticles.SetActive(true);
 
 		} else if (illness == Illness.Stroke) {
 			recoveryRate = 4f;
 			sickeningRate = 2f;
+			illParticles.SetActive(true);
 
 		} else {
 			recoveryRate = baseRecovery;
