@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3026982467178994477}
   - component: {fileID: 3026982467178994476}
   - component: {fileID: 8681855008228147665}
+  - component: {fileID: 495595752278505743}
   m_Layer: 0
   m_Name: Ron Patient
   m_TagString: Patient
@@ -77,6 +78,7 @@ MonoBehaviour:
   maxHealth: 10
   illness: 0
   presentNurse: 0
+  isTarget: 0
 --- !u!114 &3026982467178994477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +124,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &495595752278505743
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026982467178994467}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &3026982467827390419
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +150,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3026982467827390428}
   - component: {fileID: 3026982467827390430}
-  - component: {fileID: 3026982467827390429}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -202,19 +219,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!54 &3026982467827390429
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3026982467827390419}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

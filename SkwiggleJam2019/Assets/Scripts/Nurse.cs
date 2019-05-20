@@ -23,10 +23,18 @@ public class Nurse : MonoBehaviour
 	public GameObject healing, crying;
 	public bool fear;
 
+	public AudioClip healSFX;
+	private bool healingTrig;
+	private AudioSource sound;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         state = State.Chart;
+
+		healingTrig = false;
+
+		sound = this.GetComponent<AudioSource>();
 
 		healing.SetActive(false);
 		crying.SetActive(false);
@@ -72,13 +80,18 @@ public class Nurse : MonoBehaviour
         }
         else if (state == State.Heal)
         {
-			healing.SetActive(true);
+			if (!healingTrig) {
+				healing.SetActive(true);
+				sound.PlayOneShot(healSFX, 0.5f);
+				healingTrig = true;
+			}
 
             focusedPatient.health = Mathf.Clamp(focusedPatient.health += Time.deltaTime * healRate, 0, focusedPatient.maxHealth);
 			focusedPatient.presentNurse = true;
 
             if (focusedPatient.health == focusedPatient.maxHealth)
             {
+				healingTrig = false;
                 state = State.Move;
                 agent.isStopped = false;
                 pointOfInterest = PointOfInterest.Computer;
