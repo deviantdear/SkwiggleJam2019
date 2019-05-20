@@ -123,8 +123,7 @@ public class PlayerController : MonoBehaviour {
 					up = true;
 					down = false;
 					left = false;
-					right = false;
-                    spriteRenderer.flipX = true; //toggles sprite left and right
+					right = false;          
                 }
 
 			} else if (!Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S)) {
@@ -163,7 +162,8 @@ public class PlayerController : MonoBehaviour {
 					down = false;
 					left = true;
 					right = false;
-				}
+                    spriteRenderer.flipX = true; //toggles sprite left and right
+                }
 
 			} else {
 				hSpeed = 0.0f;
