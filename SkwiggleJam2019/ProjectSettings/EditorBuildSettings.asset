@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/00_TitleScene.unity
     guid: 98ed6ce89206e01408b6637889db302f
+  - enabled: 1
+    path: Assets/Scenes/ValScene(Alex did steal).unity
+    guid: 4f5cda471b141e2428722fbada6635bb
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: d372062bb48e58d4c9431942663005f0
   m_configObjects: {}

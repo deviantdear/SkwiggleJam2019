@@ -12,7 +12,7 @@ public class MenuController : MonoBehaviour {
 	void Start() {
 		nextScene = SceneManager.GetActiveScene().buildIndex + 1;
 
-		if (nextScene > 5) { // Change "5" to whatever the max number of scenes is - 1
+		if (nextScene > 2) { // Change "5" to whatever the max number of scenes is - 1
 			nextScene = 0;
 		}
 
