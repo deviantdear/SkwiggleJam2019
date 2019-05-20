@@ -93,7 +93,7 @@ MonoBehaviour:
   priorityAwareness: 0
   assignedPatients: []
   healRate: 0
-  baseHeal: 0
+  baseHeal: 10
   mournTime: 5
   healing: {fileID: 6350788538600647864}
   crying: {fileID: 9076267882408274110}
@@ -455,16 +455,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5390149125510872305}
     m_Modifications:
-    - target: {fileID: 3921367485179582014, guid: ec2d2c5d6a7a5c74682b2d9150f6a013,
-        type: 3}
-      propertyPath: m_Name
-      value: HealingParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921367485179582014, guid: ec2d2c5d6a7a5c74682b2d9150f6a013,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3921367485179582013, guid: ec2d2c5d6a7a5c74682b2d9150f6a013,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -519,6 +509,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921367485179582014, guid: ec2d2c5d6a7a5c74682b2d9150f6a013,
+        type: 3}
+      propertyPath: m_Name
+      value: HealingParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921367485179582014, guid: ec2d2c5d6a7a5c74682b2d9150f6a013,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec2d2c5d6a7a5c74682b2d9150f6a013, type: 3}
