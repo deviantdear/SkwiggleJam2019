@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour {
 
 // Casting variables for Death's ailments
 	public Image cast1, cast2, cast3;
+	public float castCooldown1, castCooldown2, castCooldown3;
 	private bool casting;
 	private float coolDownMax, coolDown1, coolDown2, coolDown3, coolDownAlpha;
 	private RaycastHit seen;
@@ -359,7 +360,7 @@ public class PlayerController : MonoBehaviour {
 		yield return new WaitForSeconds (1.0f);
 
 		if (coolDown1 < coolDownMax) {
-			coolDown1 += coolDownMax/5f;
+			coolDown1 += coolDownMax/castCooldown1;
 
 			if (coolDown1 > coolDownMax) {
 				coolDown1 = coolDownMax;
@@ -373,7 +374,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (coolDown2 < coolDownMax) {
-			coolDown2 += coolDownMax/5f;
+			coolDown2 += coolDownMax/castCooldown2;
 
 			if (coolDown2 > coolDownMax) {
 				coolDown2 = coolDownMax;
@@ -387,7 +388,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (coolDown3 < coolDownMax) {
-			coolDown3 += coolDownMax/5f;
+			coolDown3 += coolDownMax/castCooldown3;
 
 			if (coolDown3 > coolDownMax) {
 				coolDown3 = coolDownMax;
