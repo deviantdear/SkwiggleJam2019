@@ -7,8 +7,7 @@ public class Call : MonoBehaviour
     public Patient patient;
 
     public SphereCollider col;
-
-    
+	    
     [Header("Exposed Variables")]
     public float seconds;
     public float ringLength;
@@ -16,13 +15,10 @@ public class Call : MonoBehaviour
     public float additionalMult;
     //public float priority;
 
-
     [HideInInspector]
     public float mult;
 
-
-
-    public void StartCall(float wellness)
+	public void StartCall(float wellness)
     {
         StartCoroutine(Expand(wellness));
     }
@@ -32,9 +28,7 @@ public class Call : MonoBehaviour
     IEnumerator Expand(float wellness)
     {
 
-
-
-        patient.isCalling = true;
+		patient.isCalling = true;
 
         int currentRing = 1;
         float testTimer = 0f;
@@ -88,9 +82,7 @@ public class Call : MonoBehaviour
                 nurse.agent.SetDestination(transform.position);
                 nurse.priorityAwareness = mult;
             }
-
-
-        }
+		}
 
         if (other.gameObject.CompareTag("Doctor"))
         {

@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag("Nurse")) {
+		if (other.gameObject.CompareTag("NurseSight")) {
 			Transform t = other.gameObject.transform;
 
 			while (t.parent != null) {
@@ -411,14 +411,15 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				timerText.text = deadline/60 + ":0" + deadline%60;
 			}
-			deadline--;
 
 		} else {
+			timerText.text = "0:00";
 			Time.timeScale = 0.0f;
 			failureCanvas.SetActive(true);
 		}
 
-		if (deadline > 0) {
+		deadline--;
+		if (deadline >= 0) {
 			StartCoroutine(DeadlineCounter());
 		}
 	}
