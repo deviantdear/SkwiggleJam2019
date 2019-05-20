@@ -20,9 +20,6 @@ public class Nurse : MonoBehaviour
     public float mournTime;
     float mournTimer;
 
-
-   
-
 	public GameObject healing, crying;
 	public bool fear;
 
@@ -34,12 +31,12 @@ public class Nurse : MonoBehaviour
 		healing.SetActive(false);
 		crying.SetActive(false);
 		fear = false;
+
+		healRate = baseHeal;
     }
 
     private void Update()
     {
-        
-
         if(state == State.Chart)
         {
             if (pointOfInterest == PointOfInterest.Patient)

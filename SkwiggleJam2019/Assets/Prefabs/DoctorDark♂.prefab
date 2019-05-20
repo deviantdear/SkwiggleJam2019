@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6027600162602111600}
   - component: {fileID: 6027600162602111607}
   - component: {fileID: 8290858348651776651}
+  - component: {fileID: 7279481359433146697}
   m_Layer: 0
   m_Name: "DoctorDark\u2642"
   m_TagString: Doctor
@@ -92,6 +93,20 @@ MonoBehaviour:
   mournTime: 5
   chartTime: 0
   assignedPatients: []
+--- !u!136 &7279481359433146697
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6027600162602111499}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.2595818
+  m_Height: 1.2787452
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: -0.015026331}
 --- !u!1 &6027600163578035128
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ public class Patient : MonoBehaviour
 	public bool presentNurse;
 	private float baseRecovery, baseSickening;
 	public bool isTarget;
+	private GameObject victoryCanvas;
 
     // get the player's condition
     public Wellness condition
@@ -41,6 +42,10 @@ public class Patient : MonoBehaviour
 
     // increase the priorities based on the wellness
     float[] wellnessPriorities;
+
+	private void Awake() {
+		victoryCanvas = GameObject.Find("VictoryCanvas");
+	}
 
     private void Start()
     {
@@ -86,13 +91,17 @@ public class Patient : MonoBehaviour
                 // assign a call with a priority value based on condition
                 call.StartCall(wellnessPriorities[Mathf.Clamp((int)condition,0,wellnessPriorities.Length-1)]);
 		} else if (condition == Wellness.Death && isTarget) {
-
-
+			victoryCanvas.SetActive(true);
+			Time.timeScale = 0.0f;
 		}
     }
 
 	IEnumerator Dying() {
 		yield return new WaitForSeconds (1.0f);
+
+		if (health <= 0) {
+			//condition = condition.Death;
+		}
 
 		if (presentNurse && health < maxHealth) {
 			if (health > maxHealth) {

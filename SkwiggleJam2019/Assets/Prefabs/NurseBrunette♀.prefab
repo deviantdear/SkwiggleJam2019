@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 4053963459460078756}
   - component: {fileID: 4053963459460078755}
   - component: {fileID: 4937067077696262656}
+  - component: {fileID: 244495681357532280}
   m_Layer: 0
   m_Name: "NurseBrunette\u2640"
   m_TagString: Nurse
@@ -220,6 +221,20 @@ MonoBehaviour:
   healing: {fileID: 5281090094382502703}
   crying: {fileID: 6360859986320101987}
   fear: 0
+--- !u!136 &244495681357532280
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053963459460078815}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.2595818
+  m_Height: 1.2787452
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: -0.015026331}
 --- !u!1 &4053963460312298860
 GameObject:
   m_ObjectHideFlags: 0

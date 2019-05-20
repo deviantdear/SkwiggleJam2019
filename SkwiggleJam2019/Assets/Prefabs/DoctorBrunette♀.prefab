@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 1256838139333377973}
   - component: {fileID: 1256838139333377970}
   - component: {fileID: 7903889570623942929}
+  - component: {fileID: 6530462495650854024}
   m_Layer: 0
   m_Name: "DoctorBrunette\u2640"
   m_TagString: Doctor
@@ -221,3 +222,17 @@ MonoBehaviour:
   healing: {fileID: 0}
   crying: {fileID: 0}
   fear: 0
+--- !u!136 &6530462495650854024
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256838139333377998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.2595818
+  m_Height: 1.2787452
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: -0.015026331}

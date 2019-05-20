@@ -119,7 +119,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 76026dcfc7ad89b419679bba7a271781, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: f96ff7ca13647374098d0bb3e846badb, type: 2}
 --- !u!1 &27948704
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,7 +979,7 @@ PrefabInstance:
     - target: {fileID: 3894705493661866908, guid: f95393c384f347a49accadf53b77450b,
         type: 3}
       propertyPath: assignedPatients.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3894705493661866908, guid: f95393c384f347a49accadf53b77450b,
         type: 3}
@@ -8566,6 +8566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Patient (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026982467178994478, guid: 1e11d226357cf7149a75e7225a6da3ec,
+        type: 3}
+      propertyPath: isTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3026982467178994472, guid: 1e11d226357cf7149a75e7225a6da3ec,
         type: 3}

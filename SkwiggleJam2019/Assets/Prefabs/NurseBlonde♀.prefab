@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5390149124390573368}
   - component: {fileID: 5390149124390573375}
   - component: {fileID: 3894705493661866908}
+  - component: {fileID: 3798528853482009791}
   m_Layer: 0
   m_Name: "NurseBlonde\u2640"
   m_TagString: Nurse
@@ -97,6 +98,20 @@ MonoBehaviour:
   healing: {fileID: 6350788538600647864}
   crying: {fileID: 9076267882408274110}
   fear: 0
+--- !u!136 &3798528853482009791
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5390149124390573379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.2595818
+  m_Height: 1.2787452
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: -0.015026331}
 --- !u!1 &5390149124826783418
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CryingParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163543025064038631, guid: 18cadb512d2b2554ea8b4cd574d6d917,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6163543025064038628, guid: 18cadb512d2b2554ea8b4cd574d6d917,
         type: 3}
