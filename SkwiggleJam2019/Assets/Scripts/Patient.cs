@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Wellness {Healthy, Unwell, Sick, CodeRed, Death}
-public enum Illness {None, Infection, HeartAttack, Stroke}
+public enum Illness {None, Infection, HeartAttack, Stroke, Dead}
 
 public class Patient : MonoBehaviour
 {
@@ -106,6 +106,10 @@ public class Patient : MonoBehaviour
 		} else if (condition == Wellness.Death && isTarget) {
 			victoryCanvas.SetActive(true);
 			Time.timeScale = 0.0f;
+		} else if (condition == Wellness.Death) {
+			illParticles.SetActive(false);
+			illness = Illness.Dead;
+			//affect sprite colour
 		}
     }
 }
