@@ -58,14 +58,18 @@ public class Patient : MonoBehaviour
 		presentNurse = false;
 
 		baseRecovery = baseSickening = Random.Range(1, 3);
-
-		StartCoroutine(Dying());
     }
 
-    private void Update()
-    {
+    private void Update() {
         // deplete health
         health -= Time.deltaTime * sickeningRate;
+
+		if (health > maxHealth) {
+			health = maxHealth;
+		}
+		if (health >= maxHealth) {
+			illness = Illness.None;
+		}
 
 		if (illness == Illness.Infection) {
 			recoveryRate = 2f;
@@ -95,22 +99,4 @@ public class Patient : MonoBehaviour
 			Time.timeScale = 0.0f;
 		}
     }
-
-	IEnumerator Dying() {
-		yield return new WaitForSeconds (1.0f);
-
-		if (health <= 0) {
-			//condition = condition.Death;
-		}
-
-		if (presentNurse && health < maxHealth) {
-			if (health > maxHealth) {
-				health = maxHealth;
-			}
-			if (health >= maxHealth) {
-				illness = Illness.None;
-			}
-
-		}
-	}
 }

@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
 	public float viewDistance;
 	public GameObject pauseCanvas;
 	private GameObject failureCanvas, victoryCanvas;
+	public AudioClip sound1, sound2, sound3;
+	private AudioSource speaker;
 
 // Sprite Handling Variables
 	private GameObject deathSpriteObj;
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour {
 
 // Start is called before the first frame update
 	void Start() {
+		speaker = this.GetComponent<AudioSource>();
 		paused = casting = false;
 		coolDown1 = coolDown2 = coolDown3 = coolDownMax = 100f;
 		coolDownAlpha = 0.25f;
@@ -248,6 +251,7 @@ public class PlayerController : MonoBehaviour {
 									Color temp = cast1.color;
 									temp.a = coolDownAlpha;
 									cast1.color = temp;
+									speaker.PlayOneShot(sound1, 1.0f);
 									patientScript.illness = Illness.Infection;
 
 								} else if (Input.GetKey(KeyCode.Alpha2) && coolDown2 == coolDownMax) {
@@ -255,6 +259,7 @@ public class PlayerController : MonoBehaviour {
 									Color temp = cast2.color;
 									temp.a = coolDownAlpha;
 									cast2.color = temp;
+									speaker.PlayOneShot(sound2, 1.0f);
 									patientScript.illness = Illness.HeartAttack;
 
 								} else if (Input.GetKey(KeyCode.Alpha3) && coolDown3 == coolDownMax) {
@@ -262,6 +267,7 @@ public class PlayerController : MonoBehaviour {
 									Color temp = cast3.color;
 									temp.a = coolDownAlpha;
 									cast3.color = temp;
+									speaker.PlayOneShot(sound3, 1.0f);
 									patientScript.illness = Illness.Stroke;
 								}
 
