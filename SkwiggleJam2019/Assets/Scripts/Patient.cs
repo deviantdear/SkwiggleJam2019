@@ -69,14 +69,14 @@ public class Patient : MonoBehaviour
 
 		if (illness == Illness.Infection) {
 			recoveryRate = 2f;
-			sickeningRate = 6f;
+			sickeningRate = 4f;
 
 		} else if (illness == Illness.HeartAttack) {
 			recoveryRate = 4f;
 			sickeningRate = 4f;
 
 		} else if (illness == Illness.Stroke) {
-			recoveryRate = 6f;
+			recoveryRate = 4f;
 			sickeningRate = 2f;
 
 		} else {
@@ -107,7 +107,7 @@ public class Patient : MonoBehaviour
 			if (health > maxHealth) {
 				health = maxHealth;
 			}
-			if (health == maxHealth) {
+			if (health >= maxHealth) {
 				illness = Illness.None;
 			}
 
